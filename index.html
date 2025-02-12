@@ -100,10 +100,7 @@
             })
             Signupbtn.addEventListener("click", function() {
                 if (ConfirmPassword.value == Password.value && Password.value.length >= 8 && Username.value.length >= 8 && Email.value.includes("@") && Email.value.includes(".")) {
-                    const file = new File(logininfo, "test.txt", {
-                          type: "text/plain",
-                    });
-                    document.getElementById("dl").href = file
+                    document.writeln("Success")
                 } else {
                     invalid.innerHTML = "Invalid Details!"
                     if (ConfirmPassword.value != Password.value) {
