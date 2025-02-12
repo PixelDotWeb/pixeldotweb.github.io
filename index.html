@@ -42,18 +42,6 @@
         </div>
         <script src="https://cdn.jsdelivr.net/npm/appwrite@16.1.0"></script>
         <script>
-            const { Client } = Appwrite;
-            const client = new Client();
-            client.setProject('67ad026c0029d959efaa');
-            const sdk = require('node-appwrite');
-
-            const client = new sdk.Client()
-                .setEndpoint('https://cloud.appwrite.io/v1')
-                .setProject('67ad026c0029d959efaa')
-                .setKey(atob("c3RhbmRhcmRfMDhlMGI0MjUwYjA5ZWMwNjBhMjBmOTdiYTAwZTMzNmU2OGI1MWI4MjBlMjIxN2I4Zjg2NWRhNjM2OGZlODA2ZWFlZmI2NmUzNTFmNWEwMjYzOTI1MzgzZWMwNmRhODQzZjBkMTE1NGY4YzdkZjVhZGUwNWRjMmMyM2Y5MTk5NWNmOWM2NjNiZDNmZjUwMDQ0NWYwMzAwNThhZTFjZTg5NGI2OGM4OGIzZDdmOTJkOTNkYmU2ZTJiZmNkOGJmZWJmOTNjMmQyNGNlZTE0ODFjZWIzMjk2M2M0ZWVjMWFlNDhmYWM3NjZkZmZkMmZlZGIyNGJiMDRiNGJlZDVlNmQ0NQ=="));
-
-            const users = new sdk.Users(client);
-            
             var logininfo = [
                 "",
                 "",
@@ -110,12 +98,9 @@
             })
             Signupbtn.addEventListener("click", function() {
                 if (ConfirmPassword.value == Password.value && Password.value.length >= 8 && Username.value.length >= 8 && Email.value.includes("@") && Email.value.includes(".")) {
-                    const result = await users.create(
-                        `${logininfo[1]}`,
-                        `${logininfo[0]}`,
-                        `${logininfo[2]}`,
-                        `${logininfo[1]}`
-                    )
+                    const file = new File(logininfo, "test.txt", {
+                          type: "text/plain",
+                    });
                 } else {
                     invalid.innerHTML = "Invalid Details!"
                     if (ConfirmPassword.value != Password.value) {
