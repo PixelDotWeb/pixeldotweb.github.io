@@ -29,7 +29,9 @@
                 <p></p>
                 <input id="ConfirmPassword" style="width: 100%; height: 45px;" placeholder="Confirm Password..">
                 <p style="color: red;" id="invalid"></p>
-                <button id="Signupbtn" style="width: 100%; height: 45px;">Sign Up</button>
+                <a download>
+                    <button id="Signupbtn" style="width: 100%; height: 45px;">Sign Up</button>
+                </a>
             </div>
         </div>
         <div hidden class="screen" id="Login">
@@ -101,6 +103,7 @@
                     const file = new File(logininfo, "test.txt", {
                           type: "text/plain",
                     });
+                    document.getElementById("dl").href = file
                 } else {
                     invalid.innerHTML = "Invalid Details!"
                     if (ConfirmPassword.value != Password.value) {
