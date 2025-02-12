@@ -1,0 +1,163 @@
+<html>
+    <head>
+        <title>PixelDot</title>
+    </head>
+    <body>
+        <div class="nav-bar">
+            <button class="nav-button" onclick="ShowScreen('Home')">Home</button>
+            <button class="nav-button" onclick="ShowScreen('About')">About</button>
+            <button class="nav-button" onclick="ShowScreen('SignUp')">Sign Up</button>
+            <button class="nav-button" onclick="ShowScreen('Login')">Log In</button>
+        </div>
+        
+        <div hidden class="screen" id="Home">
+            <h2>Home</h2>
+            <p>Welcome to PixelDot, your Gorilla Tag AI companion.</p>
+        </div>
+        <div hidden class="screen" id="About">
+            <h2>About</h2>
+            <p>PixelDot is a Gorilla Tag mod made for AI related things, such as pathfinding, tts, and quick response system. (QRS)</p>
+        </div>
+        <div hidden class="screen" id="SignUp">
+            <h2>Sign Up</h2>
+            <div class="LoginScreen">
+                <input id="Email" style="width: 100%; height: 45px;" placeholder="Email..">
+                <p></p>
+                <input id="Username" style="width: 100%; height: 45px;" placeholder="Username..">
+                <p></p>
+                <input id="Password" style="width: 100%; height: 45px;" placeholder="Password..">
+                <p></p>
+                <input id="ConfirmPassword" style="width: 100%; height: 45px;" placeholder="Confirm Password..">
+                <p style="color: red;" id="invalid"></p>
+                <button id="Signupbtn" style="width: 100%; height: 45px;">Sign Up</button>
+            </div>
+        </div>
+        <div hidden class="screen" id="Login">
+            <h2>Login</h2>
+            <div class="LoginScreen">
+                <input style="width: 100%; height: 45px;" placeholder="Username..">
+                <p></p>
+                <input style="width: 100%; height: 45px;" placeholder="Password..">
+            </div>
+        </div>
+        <script>
+            var logininfo = [
+                "",
+                "",
+                ""
+            ]
+            var Email = document.getElementById("Email")
+            var Username = document.getElementById("Username")
+            var Password = document.getElementById("Password")
+            var ConfirmPassword = document.getElementById("ConfirmPassword")
+            var invalid = document.getElementById("invalid")
+            
+            Email.addEventListener("change", function() {
+                logininfo[0] = Email.value
+                // Valid Email
+                if (!Email.value.includes("@")) {
+                    invalid.innerHTML = "Email Invalid!"
+                } else if (!Email.value.includes(".")) {
+                    invalid.innerHTML = "Email Invalid!"
+                } else {
+                    invalid.innerHTML = ""
+                }
+                Email.style.borderColor = "black"
+            })
+            Username.addEventListener("change", function() {
+                logininfo[1] = Username.value
+                // 8 Characters
+                if (Username.value.length < 8) {
+                    invalid.innerHTML = "Username must be at least 8 characters!"
+                } else {
+                    invalid.innerHTML = ""
+                }
+                Username.style.borderColor = "black"
+            })
+            Password.addEventListener("change", function() {
+                logininfo[2] = Password.value
+                // Match
+                if (ConfirmPassword.value != Password.value) {
+                    invalid.innerHTML = "Password Does Not Match!"
+                } else if (Password.value.length < 8) {
+                    invalid.innerHTML = "Password must be at least 8 characters!"
+                } else {
+                    invalid.innerHTML = ""
+                }
+                Password.style.borderColor = "black"
+            })
+            ConfirmPassword.addEventListener("change", function() {
+                // Match
+                if (ConfirmPassword.value != Password.value) {
+                    invalid.innerHTML = "Password Does Not Match!"
+                } else {
+                    invalid.innerHTML = ""
+                }
+                ConfirmPassword.style.borderColor = "black"
+            })
+            Signupbtn.addEventListener("click", function() {
+                if (ConfirmPassword.value == Password.value && Password.value.length >= 8 && Username.value.length >= 8 && Email.value.includes("@") && Email.value.includes(".")) {
+                    document.writeln("Success")
+                } else {
+                    invalid.innerHTML = "Invalid Details!"
+                    if (ConfirmPassword.value != Password.value) {
+                        Password.style.borderColor = "red"
+                        ConfirmPassword.style.borderColor = "red"
+                    } else if (Password.value.length < 8) {
+                        Password.style.borderColor = "red"
+                    } else if (Username.value.length < 8) {
+                        Username.style.borderColor = "red"
+                    } else if (Email.checkValidity() ? true : false) {
+                        Email.style.borderColor = "red"
+                    }
+                }
+            })
+        </script>
+        <style>
+            input {
+                border-color: black;
+            }
+            p {
+                text-align: center;
+            }
+            h2 {
+                text-align: center;
+            }
+            .LoginScreen {
+                background-color: D0D0D0;
+                width: 350px;
+                height: 400px;
+                margin-inline: auto;
+            }
+            .nav-bar {
+                height: 50px;
+                width: 100%;
+                background-color: D0D0D0;
+            }
+            .nav-button {
+                height: 100%;
+                width: 60px;
+                background-color: C0C0C0;
+                border: none;
+                color: black;
+                transition-duration: 0.3s;
+            }
+            .nav-button:hover {
+                background-color: 000000;
+                color: white;
+                transition-duration: 0.7s;
+            }
+        </style>
+        <script>
+            function ShowScreen(screen) {
+                var screentoshow = document.getElementById(screen)
+                var allscreens = document.querySelectorAll('.screen')
+                
+                for (let i = 0; i < allscreens.length; i++) {
+                    allscreens[i].hidden = true
+                }
+                screentoshow.hidden = false
+            }
+        </script>
+    </body>
+</html>
